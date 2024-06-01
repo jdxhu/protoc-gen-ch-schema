@@ -13,4 +13,4 @@ CREATE TABLE IF NOT EXISTS test_replacing_merge_table
 ORDER BY ctime
 PARTITION BY toYYYYMM(ctime)
 TTL ctime + INTERVAL 3 MONTH
-SETTINGS index_granularity = '8192'
+SETTINGS index_granularity = '8192';

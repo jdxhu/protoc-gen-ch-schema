@@ -9,9 +9,9 @@ import (
 )
 
 const (
-	sqlTplMergeTree          = "CREATE TABLE IF NOT EXISTS {table_name}\n(\n\t{fields}\n) ENGINE = MergeTree()\n[ORDER BY {order_by_expr}\n][PARTITION BY {partion_expr}\n][TTL {ttl_expr}\n][SETTINGS {settings}];"
-	sqlTplReplacingMergeTree = "CREATE TABLE IF NOT EXISTS {table_name}\n(\n\t{fields}\n) ENGINE = ReplacingMergeTree([{replaceing_ver}[, {replacing_deleted_row}]])\n[ORDER BY {order_by_expr}\n][PARTITION BY {partion_expr}\n][TTL {ttl_expr}\n][SETTINGS {settings}];"
-	sqlTplSummingMergeTree   = "CREATE TABLE IF NOT EXISTS {table_name}\n(\n\t{fields}\n) ENGINE = SummingMergeTree([({summing_columns})])\n[ORDER BY {order_by_expr}\n][PARTITION BY {partion_expr}\n][TTL {ttl_expr}\n][SETTINGS {settings}];"
+	sqlTplMergeTree          = "CREATE TABLE IF NOT EXISTS {table_name}\n(\n\t{fields}\n) ENGINE = MergeTree()[\nORDER BY {order_by_expr}][\nPARTITION BY {partion_expr}][\nTTL {ttl_expr}][\nSETTINGS {settings}];"
+	sqlTplReplacingMergeTree = "CREATE TABLE IF NOT EXISTS {table_name}\n(\n\t{fields}\n) ENGINE = ReplacingMergeTree([{replaceing_ver}[, {replacing_deleted_row}]])[\nORDER BY {order_by_expr}][\nPARTITION BY {partion_expr}][\nTTL {ttl_expr}][\nSETTINGS {settings}];"
+	sqlTplSummingMergeTree   = "CREATE TABLE IF NOT EXISTS {table_name}\n(\n\t{fields}\n) ENGINE = SummingMergeTree([({summing_columns})])[\nORDER BY {order_by_expr}][\nPARTITION BY {partion_expr}][\nTTL {ttl_expr}][\nSETTINGS {settings}];"
 
 	// defaultCreateTimeField is the default column name for create time
 	defaultCreateTimeField = "ctime"
