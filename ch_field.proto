@@ -1,0 +1,36 @@
+syntax = "proto3";
+package gen_ch_schema;
+
+option go_package = "github.com/jdxhu/protoc-gen-ch-schema/protos";
+
+import "google/protobuf/descriptor.proto";
+
+
+message ClickHouseFieldOptions {
+    // Flag to specify that a field should be marked as 'REQUIRED' when
+    // used to generate schema for ClickHouse.
+    bool require = 1;
+
+    // Optionally override whatever type is resolved by the schema
+    // generator. This is useful, for example, to store epoch timestamps
+    // as DateTime instead of UInt32.
+    string type_override = 2;
+
+    // Optionally omit a field from ClickHouse schema.
+    bool ignore = 3;
+
+    // Set the description for a field in ClickHouse schema.
+    string description = 4;
+
+    // Customize the name of the field in the ClickHouse schema.
+    string name = 5;
+
+    // Optional default value.
+    string default_value_expression = 6;
+}
+
+
+extend google.protobuf.FieldOptions {
+    // ClickHouse field schema generation options.
+    ClickHouseFieldOptions clickhouse = 18123;
+}

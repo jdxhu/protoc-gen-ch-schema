@@ -1,0 +1,53 @@
+syntax = "proto2";
+package ddl;
+import "ch_table.proto";
+import "ch_field.proto";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+message TestReplaceMergeTable {
+  option (gen_ch_schema.clickhouse_opts) = {
+    table_name: "test_replacing_merge_table"
+    table_engine: REPLACING_MERGE_TREE
+    time_partition: MONTH
+    ttl: "3m"
+    settings: [
+        {
+            name: "index_granularity"
+            value: "8192"
+        }
+    ]
+    replacing_version_col: "e"
+  };
+  message Nested {
+    repeated int32 a = 1;
+    repeated string b = 2;
+  }
+
+  // Description of field a -- this is an int32
+  required int32 a = 1;
+
+  // Nested b structure
+  optional Nested b = 2;
+
+  // Repeated c string
+  repeated string c = 3;
+
+  optional bool d = 4 [(gen_ch_schema.clickhouse).ignore = true];
+
+  // TIMESTAMP (uint64 in proto) - required in ClickHouse
+  optional uint64 e = 5 [
+    (gen_ch_schema.clickhouse) = {
+      require: true
+      type_override: 'DateTime'
+    }
+  ];
+
+  optional google.protobuf.Int32Value wkt1 = 11;
+  optional google.protobuf.Timestamp wkt2 = 12;
+}
+
+message Baz {
+  required int32 a = 1;
+}

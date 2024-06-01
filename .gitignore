@@ -1,0 +1,6 @@
+.vscode/*
+bin/
+
+
+# Ignore build output
+protoc-gen-ch-schema
