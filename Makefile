@@ -38,8 +38,8 @@ realclean: distclean
 	rm -f $(PROTO_GENFILES)
 
 examples: $(CH_PLUGIN)
-	protoc -I. --plugin=$(CH_PLUGIN) --ch-schema_out=examples $(EXAMPLES_PROTO)
-	protoc -I. --plugin=$(CH_PLUGIN) --ch-schema_out=examples $(EXAMPLES_REPLACING_PROTO)
-	protoc -I. --plugin=$(CH_PLUGIN) --ch-schema_out=examples $(EXAMPLES_SUMMING_PROTO)
+	protoc -I. --plugin=$(CH_PLUGIN) --ch-schema_out=examples/schema $(EXAMPLES_PROTO)
+	protoc -I. --plugin=$(CH_PLUGIN) --ch-schema_out=examples/schema $(EXAMPLES_REPLACING_PROTO)
+	protoc -I. --plugin=$(CH_PLUGIN) --ch-schema_out=examples/schema $(EXAMPLES_SUMMING_PROTO)
 
 .PHONY: goprotobuf glog

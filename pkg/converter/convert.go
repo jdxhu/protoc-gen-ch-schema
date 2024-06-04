@@ -323,7 +323,7 @@ func convertMessageType(
 	return
 }
 
-func convertFile(file *descriptor.FileDescriptorProto) ([]*plugin.CodeGeneratorResponse_File, error) {
+func convertFile(file *descriptor.FileDescriptorProto, reqParams string) ([]*plugin.CodeGeneratorResponse_File, error) {
 	name := path.Base(file.GetName())
 	pkg, ok := globalPkg.relativelyLookupPackage(file.GetPackage())
 	if !ok {
@@ -362,9 +362,15 @@ func convertFile(file *descriptor.FileDescriptorProto) ([]*plugin.CodeGeneratorR
 			return nil, err
 		}
 		// ddl := string(bytes)
+		var pth string
+		if strings.Contains(reqParams, "source-path-relative") {
+			pth = fmt.Sprintf("%s/%s.ch.sql", strings.Replace(file.GetPackage(), ".", "/", -1), tableName)
+		} else {
+			pth = fmt.Sprintf("%s.ch.sql", tableName)
+		}
 
 		resFile := &plugin.CodeGeneratorResponse_File{
-			Name:    proto.String(fmt.Sprintf("%s/%s.sql", strings.Replace(file.GetPackage(), ".", "/", -1), tableName)),
+			Name:    proto.String(pth),
 			Content: proto.String(ddl),
 		}
 		response = append(response, resFile)
@@ -408,7 +414,7 @@ func Convert(req *plugin.CodeGeneratorRequest) (*plugin.CodeGeneratorResponse, e
 	for _, file := range req.GetProtoFile() {
 		if _, ok := generateTargets[file.GetName()]; ok {
 			glog.V(1).Info("Converting ", file.GetName())
-			converted, err := convertFile(file)
+			converted, err := convertFile(file, req.GetParameter())
 			if err != nil {
 				res.Error = proto.String(fmt.Sprintf("Failed to convert %s: %v", file.GetName(), err))
 				return res, err

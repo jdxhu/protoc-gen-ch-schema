@@ -17,8 +17,8 @@ extend google.protobuf.MessageOptions {
 }
 
 message ClickHouseMessageOptions {
-    // Specifies tabel in ClickHouse for the message.
-    // table_name should be db.table format
+    // Specifies table in ClickHouse for the message.
+    // If not set, the table name will be {package}.
     string table_name = 1;
 
     // If true, ClickHouse field names will default to a field's JSON name,
@@ -120,5 +120,4 @@ message ClickHouseMessageOptions {
     // 插入时，聚合列的值会累加
     // 默认为空 代表所有数字类型的字段都会参与聚合
     repeated string summing_aggregate_cols = 13;
-
 }

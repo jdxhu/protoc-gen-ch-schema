@@ -180,8 +180,8 @@ type ClickHouseMessageOptions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Specifies tabel in ClickHouse for the message.
-	// table_name should be db.table format
+	// Specifies table in ClickHouse for the message.
+	// If not set, the table name will be {package}.
 	TableName string `protobuf:"bytes,1,opt,name=table_name,json=tableName,proto3" json:"table_name,omitempty"`
 	// If true, ClickHouse field names will default to a field's JSON name,
 	// not its original/proto field name.
