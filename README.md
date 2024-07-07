@@ -3,6 +3,8 @@
 protoc-gen-ch-schema 是一个protibuf扩展，用于将 .proto 的定义文件转换为clickhouse sql建表语句。
 该项目参考谷歌开源的 protoc-gen-bq-schema 项目开发完成，不过最后结果是生成clickhouse直接执行的建表语句
 
+需要注意，生成的的ddl语句会新增ctime字段，该字段将用于order by、时间分区键、ttl。
+
 ## Installation
 
 ```sh
@@ -26,6 +28,8 @@ protoc --ch-schema_out=path/to/out/dir foo.proto --proto_path=. --proto_path=<pa
 ### Example
 
 Suppose that we have the following foo.proto.
+
+对于详细的配置，参考ch_table.proto/ch_field.proto定义文件。
 
 ```protobuf
 syntax = "proto2";
