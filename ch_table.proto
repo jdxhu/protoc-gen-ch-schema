@@ -78,7 +78,8 @@ message ClickHouseMessageOptions {
 
     // 表的排序键 可以大幅提高聚合查询的性能
     // 排序依照click house官方文档定义
-    // 可以使用复杂表达式 例如 "toYYYYMMDD(ctime),id"
+    // 对于多个排序键需要使用小括号包起来
+    // 可以使用复杂表达式 例如 "(toYYYYMMDD(ctime),id)"
     // default "ctime"
     string order_by = 7;
 
