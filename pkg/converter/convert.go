@@ -27,6 +27,7 @@ const (
 	chTypeDateTime = "DateTime"
 	chTypeEnum     = "Enum"
 	chTypeNested   = "Nested"
+	chTypeBool     = "Bool"
 
 	ModeOptional = "NULLABLE"
 	ModeRequired = "REQUIRED"
@@ -41,7 +42,7 @@ var (
 		".google.protobuf.UInt64Value": chTypeUInt64,
 		".google.protobuf.DoubleValue": chTypeFloat64,
 		".google.protobuf.FloatValue":  chTypeFloat32,
-		".google.protobuf.BoolValue":   chTypeUInt8,
+		".google.protobuf.BoolValue":   chTypeBool,
 		".google.protobuf.StringValue": chTypeString,
 		".google.protobuf.BytesValue":  chTypeString,
 		".google.protobuf.Duration":    chTypeInt64,
@@ -66,7 +67,7 @@ var (
 		descriptor.FieldDescriptorProto_TYPE_BYTES:  chTypeString,
 		descriptor.FieldDescriptorProto_TYPE_ENUM:   chTypeEnum,
 
-		descriptor.FieldDescriptorProto_TYPE_BOOL: chTypeUInt8,
+		descriptor.FieldDescriptorProto_TYPE_BOOL: chTypeBool,
 
 		descriptor.FieldDescriptorProto_TYPE_GROUP:   chTypeNested,
 		descriptor.FieldDescriptorProto_TYPE_MESSAGE: chTypeNested,
@@ -363,7 +364,7 @@ func convertFile(file *descriptor.FileDescriptorProto, reqParams string) ([]*plu
 		}
 		// ddl := string(bytes)
 		var pth string
-		if strings.Contains(reqParams, "source-path-relative") {
+		if strings.Contains(reqParams, "source_relative") {
 			pth = fmt.Sprintf("%s/%s.ch.sql", strings.Replace(file.GetPackage(), ".", "/", -1), tableName)
 		} else {
 			pth = fmt.Sprintf("%s.ch.sql", tableName)

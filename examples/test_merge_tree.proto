@@ -25,7 +25,7 @@ message TestMergeTable{
   }
 
   // Description of field a -- this is an int32
-  required int32 a = 1;
+  required int32 a = 1 [(gen_ch_schema.clickhouse).ignore = true];
 
   // Nested b structure
   optional Nested b = 2;
@@ -33,7 +33,7 @@ message TestMergeTable{
   // Repeated c string
   repeated string c = 3;
 
-  optional bool d = 4 [(gen_ch_schema.clickhouse).ignore = true];
+  optional bool d = 4;
 
   // TIMESTAMP (uint64 in proto) - required in ClickHouse
   optional uint64 e = 5 [

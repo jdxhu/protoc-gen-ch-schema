@@ -27,9 +27,8 @@ protoc --ch-schema_out=path/to/out/dir foo.proto --proto_path=. --proto_path=<pa
 
 ### Example
 
-Suppose that we have the following foo.proto.
-
 对于详细的配置，参考ch_table.proto/ch_field.proto定义文件。
+示例：
 
 ```protobuf
 syntax = "proto2";
@@ -87,4 +86,7 @@ message Baz {
 ```
 
 `protoc --ch-schema_out=. foo.proto` 会生成 `foo/bar_table.sql`文件.
+
+如果需要保留package相对路径，需要加入 `--ch-schema_opt=source_relative` 配置.
+
 `foo.Baz` 不会在建表字段里，根据 `gen_ch_schema.clickhouse_opts`配置.

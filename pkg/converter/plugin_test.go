@@ -75,7 +75,7 @@ func TestSimple(t *testing.T) {
 			>
 		`,
 		map[string]string{
-			"example_package/nested/foo_table.sql": "CREATE TABLE IF NOT EXISTS foo_table\n(\n\ti1 Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
+			"foo_table.ch.sql": "CREATE TABLE IF NOT EXISTS foo_table\n(\n\ti1 Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
 		})
 }
 
@@ -102,7 +102,7 @@ func TestIgnoreNonTargetMessage(t *testing.T) {
 			>
 		`,
 		map[string]string{
-			"example_package/nested/bar_table.sql": "CREATE TABLE IF NOT EXISTS bar_table\n(\n\ti1 Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
+			"bar_table.ch.sql": "CREATE TABLE IF NOT EXISTS bar_table\n(\n\ti1 Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
 		})
 }
 
@@ -130,7 +130,7 @@ func TestIgnoreNonTargetFile(t *testing.T) {
 			>
 		`,
 		map[string]string{
-			"example_package/nested/foo_table.sql": "CREATE TABLE IF NOT EXISTS foo_table\n(\n\ti1 Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
+			"foo_table.ch.sql": "CREATE TABLE IF NOT EXISTS foo_table\n(\n\ti1 Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
 		})
 }
 
@@ -160,7 +160,7 @@ func TestStopsAtRecursiveMessage(t *testing.T) {
 			>
 		`,
 		map[string]string{
-			"example_package/recursive/foo_table.sql": "CREATE TABLE IF NOT EXISTS foo_table\n(\n\ti1 Int32,\n\tbar_i2 Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
+			"foo_table.ch.sql": "CREATE TABLE IF NOT EXISTS foo_table\n(\n\ti1 Int32,\n\tbar_i2 Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
 		})
 }
 
@@ -251,7 +251,7 @@ func TestTypes(t *testing.T) {
 			>
 		`,
 		map[string]string{
-			"example_package/nested/foo_table.sql": "CREATE TABLE IF NOT EXISTS foo_table\n(\n\ti32 Int32,\n\ti64 Int64,\n\tui32 UInt32,\n\tui64 UInt64,\n\tsi32 Int32,\n\tsi64 Int64,\n\tufi32 UInt32,\n\tufi64 UInt64,\n\tsfi32 Int32,\n\tsfi64 Int64,\n\td Float64,\n\tf Float32,\n\tbool UInt8,\n\tstr String,\n\tbytes String,\n\tenum1 Enum,\n\tenum2 Enum,\n\tgrp1_i1 Int32,\n\tgrp2_i1 Int32,\n\tmsg1_i1 Int32,\n\tmsg2_i1 Int32,\n\tmsg3_i1 Int32,\n\tmsg3_i2 Int32,\n\tmsg3_i3 Int32,\n\tmsg4_i1 Int32,\n\tmsg4_i2 Int32,\n\tmsg4_i3 Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
+			"foo_table.ch.sql": "CREATE TABLE IF NOT EXISTS foo_table\n(\n\ti32 Int32,\n\ti64 Int64,\n\tui32 UInt32,\n\tui64 UInt64,\n\tsi32 Int32,\n\tsi64 Int64,\n\tufi32 UInt32,\n\tufi64 UInt64,\n\tsfi32 Int32,\n\tsfi64 Int64,\n\td Float64,\n\tf Float32,\n\tbool Bool,\n\tstr String,\n\tbytes String,\n\tenum1 Enum,\n\tenum2 Enum,\n\tgrp1_i1 Int32,\n\tgrp2_i1 Int32,\n\tmsg1_i1 Int32,\n\tmsg2_i1 Int32,\n\tmsg3_i1 Int32,\n\tmsg3_i2 Int32,\n\tmsg3_i3 Int32,\n\tmsg4_i1 Int32,\n\tmsg4_i2 Int32,\n\tmsg4_i3 Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
 		})
 }
 
@@ -403,7 +403,7 @@ func TestOrderSchemaByFieldNumber(t *testing.T) {
 			>
 		`,
 		map[string]string{
-			"example_package/nested/foo_table.sql": "CREATE TABLE IF NOT EXISTS foo_table\n(\n\tfirst Int32,\n\tsecond Array(Int32),\n\tthird Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
+			"foo_table.sql": "CREATE TABLE IF NOT EXISTS foo_table\n(\n\tfirst Int32,\n\tsecond Array(Int32),\n\tthird Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
 		})
 }
 
@@ -443,7 +443,7 @@ func TestNestedOrderSchemaByFieldNumber(t *testing.T) {
 				>
 		`,
 		map[string]string{
-			"example_package/foo_table.sql": "CREATE TABLE IF NOT EXISTS foo_table\n(\n\tf_1 Int32,\n\tbar_b_1 Int32,\n\tbar_b_2 Int32,\n\tbar_b_3 Int32,\n\tf_3 Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
+			"foo_table.sql": "CREATE TABLE IF NOT EXISTS foo_table\n(\n\tf_1 Int32,\n\tbar_b_1 Int32,\n\tbar_b_2 Int32,\n\tbar_b_3 Int32,\n\tf_3 Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
 		})
 }
 
@@ -496,6 +496,6 @@ func TestMultipleMessageOrderByFieldNumber(t *testing.T) {
 				>
 		`,
 		map[string]string{
-			"example_package/foo_table.sql": "CREATE TABLE IF NOT EXISTS foo_table\n(\n\tf_1 Int32,\n\tbar_ordered_b_1 Int32,\n\tbar_ordered_b_2 Int32,\n\tbar_ordered_b_3 Int32,\n\tbar_unordered_b_2 Int32,\n\tbar_unordered_b_3 Int32,\n\tbar_unordered_b_1 Int32,\n\tf_3 Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
+			"foo_table.sql": "CREATE TABLE IF NOT EXISTS foo_table\n(\n\tf_1 Int32,\n\tbar_ordered_b_1 Int32,\n\tbar_ordered_b_2 Int32,\n\tbar_ordered_b_3 Int32,\n\tbar_unordered_b_2 Int32,\n\tbar_unordered_b_3 Int32,\n\tbar_unordered_b_1 Int32,\n\tf_3 Int32,\n\tctime DateTime DEFAULT now() COMMENT 'create time'\n) ENGINE = MergeTree()\nORDER BY ctime;",
 		})
 }
